@@ -1,30 +1,110 @@
-html, body {
-    background-color: lightblue;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
+:root{
+    --primary:#1e6f5c;
+    --secondary:#2c3e50;
+    --accent:#f4b942;
+    --light:#f8f9fa;
+    --text:#333;
 }
 
-body {
-    nav {
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        li {
-            display: inline;
-            margin-right: 15px;
-        }
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    color:var(--text);
+    background:#eef3f1;
+    line-height:1.6;
+}
 
-        a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
+nav{
+    background:var(--secondary);
+    padding:1rem;
+}
 
-            &:hover {
-                color: #0066cc;
-            }
-        }
+nav ul{
+    display:flex;
+    justify-content:center;
+    gap:2rem;
+    list-style:none;
+    flex-wrap:wrap;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:var(--accent);
+}
+
+main{
+    max-width:900px;
+    margin:2rem auto;
+    padding:2rem;
+    background:white;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+
+h1{
+    color:var(--primary);
+    margin-bottom:1rem;
+}
+
+h2{
+    margin:1rem 0;
+}
+
+.main-logo{
+    display:block;
+    max-width:250px;
+    width:100%;
+    margin:2rem auto;
+}
+
+img{
+    max-width:60px;
+    vertical-align:middle;
+    margin-right:1rem;
+}
+
+.category-list,
+main ul{
+    list-style:none;
+    margin-top:1rem;
+}
+
+.category-list li,
+main ul li{
+    background:#f5f7f7;
+    margin:.75rem 0;
+    padding:1rem;
+    border-left:5px solid var(--primary);
+    border-radius:8px;
+}
+
+footer{
+    text-align:center;
+    padding:1.5rem;
+    background:var(--secondary);
+    color:white;
+    margin-top:2rem;
+}
+
+@media (max-width:600px){
+    nav ul{
+        flex-direction:column;
+        align-items:center;
+        gap:1rem;
     }
-}          
+
+    main{
+        margin:1rem;
+        padding:1.25rem;
+    }
+}
