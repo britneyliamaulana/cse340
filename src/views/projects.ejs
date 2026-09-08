@@ -1,10 +1,12 @@
-<%- include("partials/header") %>
+<%- include("partials/header", { title: title }) %>
 
 <h1><%= title %></h1>
 
-<p>
-  Welcome to the Service Projects page. This page will feature community
-  service projects and opportunities to get involved.
-</p>
+<h2>Upcoming Service Projects</h2>
+<ul>
+  <li>Park Cleanup - Join us to clean up local parks and make them beautiful!</li>
+  <li>Food Drive - Help collect and distribute food to those in need.</li>
+  <li>Community Tutoring - Volunteer to tutor students in various subjects.</li>
+</ul>
 
 <%- include("partials/footer") %>
