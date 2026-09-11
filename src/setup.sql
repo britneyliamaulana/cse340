@@ -72,13 +72,8 @@ VALUES
 (3, 'Clothing Donation Drive', 'Collect and distribute clothing to people in need.', 'UnityServe Center', '2026-10-30'),
 (3, 'Neighborhood Volunteer Day', 'Bring volunteers together to improve the local community.', 'Southside Community', '2026-11-06');
 
-SELECT * FROM project;
 
 
-JOIN organization o
-    ON p.organization_id = o.organization_id
-
-SELECT * FROM project;
 
 
 -- Categories table
