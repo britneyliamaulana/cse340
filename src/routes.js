@@ -5,6 +5,8 @@ import { showHomePage } from "./controllers/index.js";
 import {
   showOrganizationsPage,
   showOrganizationDetailsPage,
+  showNewOrganizationForm,
+  processNewOrganizationForm,
 } from "./controllers/organizations.js";
 
 import {
@@ -20,6 +22,7 @@ import {
 import { testErrorPage } from "./controllers/errors.js";
 
 
+
 const router = express.Router();
 
 router.get("/", showHomePage);
@@ -28,10 +31,16 @@ router.get("/projects", showProjectsPage);
 router.get("/project/:id", showProjectDetailsPage);
 router.get("/categories", showCategoriesPage);
 
+
+
 // Error testing route
 router.get("/test-error", testErrorPage);
 
 router.get("/organization/:id", showOrganizationDetailsPage);
+
+router.get("/new-organization", showNewOrganizationForm);
+
+router.post("/new-organization", processNewOrganizationForm);
 
 router.get("/category/:id", showCategoryDetailsPage);
 
