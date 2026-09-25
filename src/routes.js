@@ -9,12 +9,16 @@ import {
   processNewOrganizationForm,
   organizationValidation,
   showEditOrganizationForm,
-  processEditOrganizationForm
+  processEditOrganizationForm,
+  
 } from "./controllers/organizations.js";
 
 import {
   showProjectsPage,
   showProjectDetailsPage,
+  showNewProjectForm,
+  processNewProjectForm,
+  projectValidation,
 } from "./controllers/projects.js";
 
 import {
@@ -31,6 +35,7 @@ const router = express.Router();
 router.get("/", showHomePage);
 router.get("/organizations", showOrganizationsPage);
 router.get("/projects", showProjectsPage);
+router.get("/new-project", showNewProjectForm);
 router.get("/project/:id", showProjectDetailsPage);
 router.get("/categories", showCategoriesPage);
 
@@ -58,6 +63,12 @@ router.post(
   "/new-organization",
   organizationValidation,
   processNewOrganizationForm
+);
+
+router.post(
+  "/new-project",
+  projectValidation,
+  processNewProjectForm
 );
 
 router.get("/category/:id", showCategoryDetailsPage);
