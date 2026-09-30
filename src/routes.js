@@ -75,7 +75,11 @@ router.post(
 // Routes to edit a project
 router.get("/edit-project/:id", showEditProjectForm);
 
-router.post("/edit-project/:id", processEditProjectForm);
+router.post(
+  "/edit-project/:id",
+  projectValidation,
+  processEditProjectForm
+);
 
 
 
