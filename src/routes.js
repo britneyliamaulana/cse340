@@ -1,5 +1,6 @@
 import express from "express";
 
+import { checkLogin } from "./middleware/auth.js";
 import { showHomePage } from "./controllers/index.js";
 
 import {
@@ -35,6 +36,16 @@ import {
   processAssignCategoriesForm,
 } from "./controllers/categories.js";
 
+import {
+    showUserRegistrationForm,
+    processUserRegistrationForm,
+    showLoginForm,
+    processLoginForm,
+    processLogout,
+    requireLogin,
+    showDashboard,
+} from "./controllers/users.js";
+
 import { testErrorPage } from "./controllers/errors.js";
 
 
@@ -42,8 +53,12 @@ import { testErrorPage } from "./controllers/errors.js";
 const router = express.Router();
 
 router.get("/", showHomePage);
-router.get("/organizations", showOrganizationsPage);
-router.get("/projects", showProjectsPage);
+
+router.get("/organizations", checkLogin, showOrganizationsPage);
+router.get("/projects", checkLogin, showProjectsPage);
+
+router.get("/dashboard", requireLogin, showDashboard);
+
 router.get("/new-project", showNewProjectForm);
 router.get("/project/:id", showProjectDetailsPage);
 router.get(
@@ -54,7 +69,7 @@ router.post(
   "/assign-categories/:projectId",
   processAssignCategoriesForm
 );
-router.get("/categories", showCategoriesPage);
+router.get("/categories", checkLogin, showCategoriesPage);
 
 router.get("/new-category", showNewCategoryForm);
 
@@ -80,6 +95,14 @@ router.post(
   projectValidation,
   processEditProjectForm
 );
+
+router.get("/register", showUserRegistrationForm);
+router.post("/register", processUserRegistrationForm);
+router.get("/login", showLoginForm);
+router.post("/login", processLoginForm);
+router.get("/logout", processLogout);
+
+
 
 
 
