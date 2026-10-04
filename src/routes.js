@@ -45,6 +45,7 @@ import {
     requireLogin,
     requireRole,
     showDashboard,
+    showUsers,
 } from "./controllers/users.js";
 
 
@@ -60,6 +61,8 @@ router.get("/organizations", checkLogin, showOrganizationsPage);
 router.get("/projects", checkLogin, showProjectsPage);
 
 router.get("/dashboard", requireLogin, showDashboard);
+
+router.get("/users", requireRole("admin"), showUsers);
 
 router.get("/project/:id", showProjectDetailsPage);
 
