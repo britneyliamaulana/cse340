@@ -3,7 +3,9 @@
 <main>
     <h1><%= title %></h1>
 
-    <form action="/edit-organization/<%= organizationDetails.organization_id %>" method="POST">
+    <% if (user && user.role_name === 'admin') { %>
+    <a href="/edit-organization/<%= organization.id %>">Edit Organization</a>
+<% } %>
 
         <div class="form-group">
             <label for="name">Organization Name</label>
