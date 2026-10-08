@@ -2,7 +2,10 @@ import {
   getUpcomingProjects,
   getProjectDetails,
   createProject,
-  updateProject
+  updateProject,
+  addVolunteer,
+  removeVolunteer,
+  isUserVolunteer
 } from "../models/projects.js";
 
 import { getProjectCategories } from "../models/categories.js";
@@ -61,11 +64,59 @@ const showProjectDetailsPage = async (req, res) => {
   const project = await getProjectDetails(id);
   const categories = await getProjectCategories(id);
 
+  let isVolunteer = false;
+
+  if (req.session.user) {
+    isVolunteer = await isUserVolunteer(
+      req.session.user.user_id,
+      id
+    );
+  }
+
   res.render("project", {
     title: project.title,
     project,
     categories,
+    isVolunteer,
   });
+};
+
+const addVolunteerToProject = async (req, res) => {
+  const projectId = req.params.id;
+  const userId = req.session.user.user_id;
+
+  try {
+    await addVolunteer(userId, projectId);
+
+    req.flash("success", "You are now volunteering for this project!");
+
+    res.redirect(`/project/${projectId}`);
+  } catch (error) {
+    console.error("Error adding volunteer:", error);
+
+    req.flash("error", "There was an error signing up for this project.");
+
+    res.redirect(`/project/${projectId}`);
+  }
+};
+
+const removeVolunteerFromProject = async (req, res) => {
+  const projectId = req.params.id;
+  const userId = req.session.user.user_id;
+
+  try {
+    await removeVolunteer(userId, projectId);
+
+    req.flash("success", "You are no longer volunteering for this project.");
+
+    res.redirect(`/project/${projectId}`);
+  } catch (error) {
+    console.error("Error removing volunteer:", error);
+
+    req.flash("error", "There was an error removing your volunteer signup.");
+
+    res.redirect(`/project/${projectId}`);
+  }
 };
 
 const showNewProjectForm = async (req, res) => {
@@ -177,7 +228,6 @@ const processNewProjectForm = async (req, res) => {
 };
 
 
-
 export {
   showProjectsPage,
   showProjectDetailsPage,
@@ -186,4 +236,6 @@ export {
   projectValidation,
   showEditProjectForm,
   processEditProjectForm,
+  addVolunteerToProject,
+  removeVolunteerFromProject
 };

@@ -5,3 +5,8 @@
 
 # Email: logintest@example.com
 # Password: TestPassword123!
+
+# admin role:
+
+# admin@example.com
+# cse340!
